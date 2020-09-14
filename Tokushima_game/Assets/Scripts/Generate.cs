@@ -5,14 +5,24 @@ using System.IO;
 
 public class Generate : MonoBehaviour
 {
-    public GameObject obj;
-    // Start is called before the first frame update
+    public GameObject prefab;
+    int objNum=3;
+
+    public List<TanukiData> TanukiDataList = new List<TanukiData>(){
+        new TanukiData( "Kuwa_tanuki", true),
+        new TanukiData( "Shirotokkuri_for_unity", true),
+        new TanukiData( "Cube", false)
+    };
+
     void Start()
     {
-        // プレハブを取得
-        GameObject prefab = (GameObject)Resources.Load("Kuwa_tanuki");
-        // プレハブからインスタンスを生成
-        Instantiate(prefab);
+        float x = Random.Range(-6f, 6f);
+        float z = Random.Range(-12f, 1.5f);
+        Vector3 pos = new Vector3(x, 1f, z); 
+        //prefab = (GameObject)Resources.Load(TanukiDataList[i].path);
+        var parent = this.transform;
+        Instantiate(prefab, pos, Quaternion.identity,parent);
+        
     }
 
     // Update is called once per frame
