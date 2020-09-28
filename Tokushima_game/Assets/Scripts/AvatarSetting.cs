@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AvatarSetting : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class AvatarSetting : MonoBehaviour
     public Transform handAnchorR = null;
     public Transform handAnchorL = null;
     public float heightofAvater = 0.7f;
+    public float speed = 0.07f;
+    public Text debugUI;
+
+    public MusicPlaySystem musicPlaySystem;
 
     private Transform me;
     private Vector3 dist;
@@ -15,7 +20,10 @@ public class AvatarSetting : MonoBehaviour
     private Vector3 distL;
     private Vector3 handposR;
     private Vector3 handposL;
+    private Vector3 footposR;
+    private Vector3 footposL;
     private Vector3 Avaterpos;
+    private Vector3 Avaterpos2;
     private Animator animator;
     
     // Start is called before the first frame update
@@ -23,6 +31,8 @@ public class AvatarSetting : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         me = myLocationObj.transform;
+        Avaterpos2 = this.transform.position;
+        dist = Avaterpos2 - me.position;
     }
 
     // Update is called once per frame
@@ -34,6 +44,8 @@ public class AvatarSetting : MonoBehaviour
         Avaterpos = this.transform.position;
         handposR = new Vector3(Avaterpos.x + distR.x, Avaterpos.y + distR.y + heightofAvater, Avaterpos.z + distR.z);
         handposL = new Vector3(Avaterpos.x + distL.x, Avaterpos.y + distL.y + heightofAvater, Avaterpos.z + distL.z);
+        footposR = new Vector3(handposR.x, 0, handposR.z);
+        footposL = new Vector3(handposL.x, 0, handposL.z);
 
         //右手首のゴール地点設定
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
@@ -46,16 +58,50 @@ public class AvatarSetting : MonoBehaviour
         animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         animator.SetIKPosition(AvatarIKGoal.LeftHand, handposL);
         animator.SetIKRotation(AvatarIKGoal.LeftHand, handAnchorL.rotation);
+
+        //右足首のゴール地点設定
+        animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+        animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
+        animator.SetIKPosition(AvatarIKGoal.RightFoot, footposR);
+        animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.identity);
+
+        //左足首のゴール地点設定
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
+        animator.SetIKPosition(AvatarIKGoal.LeftFoot, footposL);
+        animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.identity);
+
     }
 
     void Update()
     {
+        //アバターの進行
 
+        if (musicPlaySystem.handsup)
+        {
+            this.transform.position += new Vector3(0, 0, speed * Time.deltaTime);
+        }
+
+
+        //プレイヤー位置によってアバターの位置変化
         /*Transform mylocation = myLocationObj.transform;
-        dist = new Vector3(mylocation.position.x - me.position.x, mylocation.position.y - me.position.y, mylocation.position.z - me.position.z);
-        me.position = mylocation.position;
-        this.transform.Translate(new Vector3(me.position.x+dist.x,me.position.y,me.position.z + dist.z));*/
-        Debug.Log("this is test");
+        if((Avaterpos2 - mylocation.position) != dist)
+        {
+            Vector3 dist2 = Avaterpos2 - mylocation.position;
+            dist2 = dist2 - dist;
+            this.transform.position = new Vector3(Avaterpos2.x + dist2.x, Avaterpos2.y, Avaterpos2.z + dist2.z);
+            dist = dist2;
+            Avaterpos2 = this.transform.position;
+        }
+        if (debugUI != null)
+        {
+            debugUI.text = Avaterpos2.ToString();
+        }
+        else
+        {
+            Debug.Log("this is test");
+        }*/
+
     }
 }
 

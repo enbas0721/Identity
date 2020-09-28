@@ -9,7 +9,7 @@ public class CreateAvaters : MonoBehaviour
     public GameObject originAvater;
     public float spaceBetweenAvaters = 1.5f;
     public int numberOfAvaters = 5;
-    public float heightofAvater = 0.7f;
+    public float heightofAvater;
 
 
     // Start is called before the first frame update
