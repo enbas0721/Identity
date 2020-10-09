@@ -82,26 +82,6 @@ public class AvatarSetting : MonoBehaviour
             this.transform.position += new Vector3(0, 0, speed * Time.deltaTime);
         }
 
-
-        //プレイヤー位置によってアバターの位置変化
-        /*Transform mylocation = myLocationObj.transform;
-        if((Avaterpos2 - mylocation.position) != dist)
-        {
-            Vector3 dist2 = Avaterpos2 - mylocation.position;
-            dist2 = dist2 - dist;
-            this.transform.position = new Vector3(Avaterpos2.x + dist2.x, Avaterpos2.y, Avaterpos2.z + dist2.z);
-            dist = dist2;
-            Avaterpos2 = this.transform.position;
-        }
-        if (debugUI != null)
-        {
-            debugUI.text = Avaterpos2.ToString();
-        }
-        else
-        {
-            Debug.Log("this is test");
-        }*/
-
     }
 }
 
