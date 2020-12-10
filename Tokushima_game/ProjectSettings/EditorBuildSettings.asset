@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Racoon City.unity
     guid: 2253afc0ba2289f4ca96310f7d712087
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Awaodori.unity
     guid: 62f5957a2550aa04484cf4e674f67fb5
   m_configObjects: {}
