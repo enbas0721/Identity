@@ -40,6 +40,13 @@ public class Runner : MonoBehaviour
     [SerializeField]
     private Image _fader;
 
+    //地形データ
+    [SerializeField]
+    private Transform terrain_trans;
+
+    [SerializeField]
+    private float speed;
+
     //楽曲再生用、一番大事
     private AudioSource _source;
 
@@ -66,6 +73,7 @@ public class Runner : MonoBehaviour
         if (_isPlaying)
         {
             SearchNote();
+            TerrainRun();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -104,6 +112,18 @@ public class Runner : MonoBehaviour
         _source.Play();
         EffectRunner.Instance.GameStart();
         _isPlaying = true;
+    }
+
+
+    ///<summary>
+    ///地形移動の処理
+    ///</summary>
+    
+    private void TerrainRun()
+    {
+        Vector3 terrain_pos;
+        terrain_pos = terrain_trans.position;
+        terrain_trans.position -= new Vector3  (0,0,speed * Time.deltaTime);
     }
 
     /// <summary>
@@ -155,7 +175,7 @@ public class Runner : MonoBehaviour
 
     private IEnumerator RestartSeq()
     {
-        yield return new WaitForSeconds(_source.clip.length - _source.time - 3.0f);
+        yield return new WaitForSeconds(_source.clip.length - _source.time); //-5.0f
 
         _fader.DOColor(Color.white, 3.0f).SetEase(Ease.Linear);
 
