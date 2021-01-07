@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RuleManager : MonoBehaviour
 {
-    public int remaining_tanuki=2;
+    public int remaining_tanuki=1;
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class RuleManager : MonoBehaviour
     {
         if (remaining_tanuki <= 0)
         {
-            Debug.Log("finish");
+            //Debug.Log("finish");
         }
     }
 }

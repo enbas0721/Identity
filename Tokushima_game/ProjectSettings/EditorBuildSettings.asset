@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 2253afc0ba2289f4ca96310f7d712087
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 9ce0babca023e474e99302d0f2e82463
   - enabled: 1
     path: Assets/Scenes/Awaodori.unity
     guid: 62f5957a2550aa04484cf4e674f67fb5
   - enabled: 1
-    path: Assets/Scenes/Start.unity
-    guid: 9ce0babca023e474e99302d0f2e82463
+    path: Assets/Scenes/Racoon City.unity
+    guid: d6e23acb451001549b12ece1c74c6fd7
+  - enabled: 1
+    path: Assets/Scenes/A_Awaodori.unity
+    guid: b59244b92f06269489917e22396360e3
+  - enabled: 1
+    path: Assets/Scenes/A_tanuki.unity
+    guid: 96e38ed017314134886dbd8f28983542
   m_configObjects: {}

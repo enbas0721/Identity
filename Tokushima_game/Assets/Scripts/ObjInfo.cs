@@ -4,40 +4,54 @@ using UnityEngine;
 
 public class ObjInfo : MonoBehaviour
 {
-    public bool isTanuki=true;
+    public bool isTanuki;
+    GameObject ruleObj;
     public GameObject particleObj;
     public AudioClip sound1;
     public AudioSource audioSource;
+    public GameObject tanuki;
+    RuleManager ruleScript;
+    Transform myTransform;
+    Vector3 pos;
+    float seconds;
 
     void Start()
     {
         //ランダム配置
-        Transform myTransform = this.transform;
-        Vector3 pos = myTransform.position;
-        pos.x = Random.Range(-7.0f, 7.0f);    
-        pos.z = Random.Range(-12.0f, 1.0f);   
+        myTransform = this.transform;
+        pos = myTransform.position;
+        pos.x = Random.Range(-4.0f, 4.0f);    
+        pos.z = Random.Range(-5.5f, -11.0f);
+        //pos.x = Random.Range(1.0f, 1.0f);
+        //pos.z = Random.Range(0f, 0f);
+        pos.y = 0.22f;
         myTransform.position = pos;
-
+        ruleObj = GameObject.Find("Rule");
         //SE
         //audioSource = GetComponent<AudioSource>();
-        
+        Debug.Log(myTransform.position);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+   
         
-
-
     }
 
-    public void Grabbed()
+    void OnCollisionEnter(Collision other)
     {
-        if (isTanuki)
+        if (other.gameObject.tag == "Hand")
         {
-            Destroy(gameObject);
-            Instantiate(particleObj, this.transform.position, Quaternion.identity);
+            Vector3 tmp = gameObject.transform.position;
+            Debug.Log("tmp" + tmp);
+            Destroy(this.gameObject);
+            Instantiate(particleObj, tmp, Quaternion.identity);
             audioSource.PlayOneShot(sound1);
+            ruleScript = ruleObj.GetComponent<RuleManager>();
+            ruleScript.remaining_tanuki = 0;
+            Instantiate(tanuki, tmp, Quaternion.identity);
         }
     }
 }

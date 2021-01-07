@@ -45,6 +45,9 @@ public class Runner : MonoBehaviour
     private Transform terrain_trans;
 
     [SerializeField]
+    private Transform Trees;
+
+    [SerializeField]
     private float speed;
 
     //楽曲再生用、一番大事
@@ -58,6 +61,7 @@ public class Runner : MonoBehaviour
 
     void Start()
     {
+
         //シーン開始時はフェードインする
         _fader.color = Color.white;
         _fader.DOColor(Color.clear, 3.0f).SetEase(Ease.Linear);
@@ -92,6 +96,7 @@ public class Runner : MonoBehaviour
         StartCoroutine(GameSeq());
     }
 
+
     /// <summary>
     /// ゲーム開始時のコルーチン
     /// </summary>
@@ -121,9 +126,8 @@ public class Runner : MonoBehaviour
     
     private void TerrainRun()
     {
-        Vector3 terrain_pos;
-        terrain_pos = terrain_trans.position;
-        terrain_trans.position -= new Vector3  (0,0,speed * Time.deltaTime);
+        terrain_trans.position -= new Vector3  (0,0, speed * Time.deltaTime);
+        Trees.transform.position -= new Vector3(0, 0, speed * Time.deltaTime);
     }
 
     /// <summary>
@@ -181,7 +185,7 @@ public class Runner : MonoBehaviour
 
         yield return new WaitForSeconds(3.0f);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
